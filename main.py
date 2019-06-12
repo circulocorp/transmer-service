@@ -29,8 +29,8 @@ transmer_pass = ""
 if env_cfg["secrets"]:
     rabbit_user = Utils.get_secret("rabbitmq_user")
     rabbit_pass = Utils.get_secret("rabbitmq_passw")
-    transmer_user = Utils.get_secret["transmer_user"]
-    transmer_pass = Utils.get_secret["transmer_pass"]
+    transmer_user = Utils.get_secret("transmer_user")
+    transmer_pass = Utils.get_secret("transmer_pass")
 else:
     rabbit_user = env_cfg["rabbitmq_user"]
     rabbit_pass = env_cfg["rabbitmq_passw"]
