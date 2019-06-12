@@ -1,0 +1,19 @@
+{
+	"name": "transmer-service",
+	"version": "0.0.1",
+	"queue": "transmer",
+	"description": "Transmer sender service",
+	"author": "Mauricio Barrera",
+    "stage": {
+		"API_URL": "http://192.168.1.68:8080",
+        "RABBITMQ_URL": "192.168.1.70",
+		"secrets": true,
+        "ENDPOINT": "http://201.155.194.29/unigis/MAPI/soap/gps/service.asmx"
+    },
+	"prod": {
+		"API_URL": "http://10.0.4.188:8080",
+        "RABBITMQ_URL": "10.0.4.100",
+		"secrets": true,
+        "ENDPOINT": "http://201.155.194.29/unigis/MAPI/soap/gps/service.asmx"
+	}
+}
