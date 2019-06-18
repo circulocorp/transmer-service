@@ -19,5 +19,6 @@ class Transmer(object):
         events["LoginYInsertarEventos"]["SystemUser"] = self._user
         events["LoginYInsertarEventos"]["Password"] = self._pass
         xml = xmltodict.unparse(events)
-        resp = self._client.service.LoginYInsertarEventos(xml)
+        resp = self._client.service.LoginYInsertarEventos(self._user, self._pass,
+                                                          events["LoginYInsertarEventos"]["Eventos"])
         return resp
