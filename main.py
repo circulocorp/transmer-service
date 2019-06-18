@@ -82,7 +82,7 @@ def fix_data(msg):
                     event["header"]["UtcTimestampSeconds"]), "America/Mexico_City"), '%d-%m-%Y %H:%M:%S')
             pEvent["FechaHoraRecepcion"] = Utils.format_date(Utils.datetime_zone(
                     Utils.string_to_date(data["date"], "%Y-%m-%d %H:%M:%S"), "America/Mexico_City"), "%d-%m-%Y %H:%M:%S")
-            events.append(pEvent)
+            events.append({"pEvento": pEvent})
         else:
             logger.error("Vehicle not found: "+event["header"]["UnitId"], extra={'props': {"app": config["name"],
                                                                                            "label": config["name"]}})

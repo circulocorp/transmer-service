@@ -16,8 +16,8 @@ class Transmer(object):
 
     def send_events(self, events):
         self._gen_client()
-        events["SystemUser"] = self._user
-        events["Password"] = self._pass
+        events["LoginYInsertarEventos"]["SystemUser"] = self._user
+        events["LoginYInsertarEventos"]["Password"] = self._pass
         xml = xmltodict.unparse(events)
         resp = self._client.service.LoginYInsertarEventos(xml)
         return resp
