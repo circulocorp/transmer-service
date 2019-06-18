@@ -88,6 +88,7 @@ def fix_data(msg):
                                                                                            "label": config["name"]}})
     registro["Eventos"] = events
     root["LoginYInsertarEventos"] = registro
+    logger.info("Sending document", extra={'props': {"raw": root, "app": config["name"], "label": config["name"]}})
     send(root)
 
 
