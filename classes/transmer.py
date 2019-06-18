@@ -12,7 +12,6 @@ class Transmer(object):
 
     def _gen_client(self):
         if self._client is None:
-            print(self._url)
             self._client = Client(self._url)
 
     def send_events(self, events):
