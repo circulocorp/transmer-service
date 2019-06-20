@@ -85,7 +85,8 @@ def fix_data(msg):
             logger.error("Vehicle not found: "+event["header"]["UnitId"], extra={'props': {"app": config["name"],
                                                                                            "label": config["name"]}})
     logger.info("Sending document", extra={'props': {"raw": events, "app": config["name"], "label": config["name"]}})
-    send(events)
+    if len(events) > 0:
+        send(events)
 
 
 def callback(ch, method, properties, body):
