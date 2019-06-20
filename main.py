@@ -63,8 +63,6 @@ def send(data):
 
 def fix_data(msg):
     print("Reading events")
-    root = {}
-    registro = dict()
     data = json.loads(msg)
     events = []
     for event in data["events"]:
@@ -82,14 +80,12 @@ def fix_data(msg):
                     event["header"]["UtcTimestampSeconds"]), "America/Mexico_City"), '%d-%m-%Y %H:%M:%S')
             pEvent["FechaHoraRecepcion"] = Utils.format_date(Utils.datetime_zone(
                     Utils.string_to_date(data["date"], "%Y-%m-%d %H:%M:%S"), "America/Mexico_City"), "%d-%m-%Y %H:%M:%S")
-            events.append({"pEvento": pEvent})
+            events.append(pEvent)
         else:
             logger.error("Vehicle not found: "+event["header"]["UnitId"], extra={'props': {"app": config["name"],
                                                                                            "label": config["name"]}})
-    registro["Eventos"] = events
-    root["LoginYInsertarEventos"] = registro
-    logger.info("Sending document", extra={'props': {"raw": root, "app": config["name"], "label": config["name"]}})
-    send(root)
+    logger.info("Sending document", extra={'props': {"raw": events, "app": config["name"], "label": config["name"]}})
+    send(events)
 
 
 def callback(ch, method, properties, body):

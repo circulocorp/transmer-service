@@ -16,7 +16,7 @@ class Transmer(object):
     def send_events(self, events):
         self._gen_client()
         pEvents = []
-        for event in events["LoginYInsertarEventos"]["Eventos"]:
+        for event in events:
             pEvento = self._client.factory.create("pEvento")
             pEvento["Dominio"] = event["Dominio"]
             pEvento["NroSerie"] = event["NroSerie"]
