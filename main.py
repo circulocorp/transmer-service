@@ -55,8 +55,8 @@ def send(data):
                 extra={'props': {"raw": data, "app": config["name"], "label": config["name"]}})
     resp = transmer.send_events(data)
     if resp:
-        logger.info("Data was accepted by Transmer", extra={'props': {"raw": data, "status": resp,
-                                                                      "app": config["name"], "label": config["name"]}})
+        logger.info("Data was accepted by Transmer",
+                    extra={'props': {"raw": data, "app": config["name"], "label": config["name"]}})
     else:
         logger.error(resp.body, extra={'props': {"raw": data, "app": config["name"], "label": config["name"]}})
 
