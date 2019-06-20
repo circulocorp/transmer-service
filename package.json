@@ -1,6 +1,6 @@
 {
 	"name": "transmer-service",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"queue": "transmer",
 	"description": "Transmer sender service",
 	"author": "Mauricio Barrera",
@@ -14,6 +14,6 @@
 		"API_URL": "http://10.0.4.188:8080",
         "RABBITMQ_URL": "10.0.4.100",
 		"secrets": true,
-        "ENDPOINT": "http://201.155.194.29/unigis/MAPI/soap/gps/service.asmx?wsdl"
+        "ENDPOINT": "http://unigis2.unisolutions.com.ar/HUB/UNIGIS/MAPI/SOAP/COMMServer/service.asmx?wsdl"
 	}
 }
