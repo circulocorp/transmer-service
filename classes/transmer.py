@@ -25,8 +25,8 @@ class Transmer(object):
             pEvento["Longitud"] = event["Longitud"]
             pEvento["Altitud"] = event["Altitud"]
             pEvento["Velocidad"] = event["Velocidad"]
-            pEvento["FechaHoraEvento"] = event["FechaHoraEvento"]
-            pEvento["FechaHoraRecepcion"] = event["FechaHoraRecepcion"]
+            pEvento["FechaHoraEvento"] = event["FechaHoraEvento"].replace(" ", "T")
+            pEvento["FechaHoraRecepcion"] = event["FechaHoraRecepcion"].replace(" ", "T")
             pEvents.append(pEvento)
         eventos = self._client.factory.create("ArrayOfPEvento")
         eventos.pEvento = pEvents
