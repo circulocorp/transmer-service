@@ -20,7 +20,7 @@ class Transmer(object):
             pEvento = self._client.factory.create("pEvento")
             pEvento["Dominio"] = event["Dominio"]
             pEvento["NroSerie"] = event["NroSerie"]
-            pEvento["Codigo"] = event["codigo"]
+            pEvento["Codigo"] = event["Codigo"]
             pEvento["Latitud"] = event["Latitud"]
             pEvento["Longitud"] = event["Longitud"]
             pEvento["Altitud"] = event["Altitud"]
