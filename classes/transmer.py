@@ -1,5 +1,4 @@
 from suds.client import Client
-import xmltodict
 
 
 class Transmer(object):
@@ -16,9 +15,20 @@ class Transmer(object):
 
     def send_events(self, events):
         self._gen_client()
-        events["LoginYInsertarEventos"]["SystemUser"] = self._user
-        events["LoginYInsertarEventos"]["Password"] = self._pass
-        xml = xmltodict.unparse(events)
-        resp = self._client.service.LoginYInsertarEventos(self._user, self._pass,
-                                                          events["LoginYInsertarEventos"]["Eventos"])
+        pEvents = []
+        for event in events["LoginYInsertarEventos"]["Eventos"]:
+            pEvento = self._client.factory.create("pEvento")
+            pEvento["Dominio"] = event["Dominio"]
+            pEvento["NroSerie"] = event["NroSerie"]
+            pEvento["Codigo"] = event["codigo"]
+            pEvento["Latitud"] = event["Latitud"]
+            pEvento["Longitud"] = event["Longitud"]
+            pEvento["Altitud"] = event["Altitud"]
+            pEvento["Velocidad"] = event["Velocidad"]
+            pEvento["FechaHoraEvento"] = event["FechaHoraEvento"]
+            pEvento["FechaHoraRecepcion"] = event["FechaHoraRecepcion"]
+            pEvents.append(pEvento)
+        eventos = self._client.factory.create("ArrayOfPEvento")
+        eventos.pEvento = pEvents
+        resp = self._client.service.LoginYInsertarEventos(self._user, self._pass, eventos)
         return resp
