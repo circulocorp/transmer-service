@@ -58,7 +58,8 @@ def send(data):
         logger.info("Data was accepted by Transmer",
                     extra={'props': {"raw": data, "app": config["name"], "label": config["name"]}})
     else:
-        logger.error(resp.body, extra={'props': {"raw": data, "app": config["name"], "label": config["name"]}})
+        print(resp)
+        logger.error(resp, extra={'props': {"raw": data, "app": config["name"], "label": config["name"]}})
 
 
 def fix_data(msg):
