@@ -3,6 +3,6 @@ datetime
 requests
 PydoNovosoft==1.1.7.2
 logging
-json-logging
+json-logging==0.0.10
 suds
 xmltodict

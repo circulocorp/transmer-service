@@ -1,6 +1,6 @@
 {
 	"name": "transmer-service",
-	"version": "0.5.9",
+	"version": "0.6.0",
 	"queue": "transmer",
 	"description": "Transmer sender service",
 	"author": "Mauricio Barrera",
