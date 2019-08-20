@@ -16,7 +16,7 @@ class Transmer(object):
             self._client = Client(self._url)
 
     def _get_token(self):
-        token = Client.dict(self._client.GetUserToken(self._user, self._pass))
+        token = Client.dict(self._client.service.GetUserToken(self._user, self._pass))
         token['expires'] = datetime.now() + timedelta(hours=24)
         self._token = token
 
