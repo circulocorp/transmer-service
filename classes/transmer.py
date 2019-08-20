@@ -1,4 +1,5 @@
 from suds.client import Client
+from datetime import datetime, timedelta
 
 
 class Transmer(object):
@@ -13,22 +14,38 @@ class Transmer(object):
         if self._client is None:
             self._client = Client(self._url)
 
+    def _get_token(self):
+        token = Client.dict(self._client.GetUserToken(self._user, self._pass))
+        token['expires'] = datetime.now() + timedelta(hours=24)
+        self._token = token
+
+    def _is_token_valid(self):
+        now = datetime.now() + timedelta(minutes=30)
+        if not self._token:
+            return False
+        if now > self._token['expires']:
+            return False
+        else:
+            return True
+
     def send_events(self, events):
         self._gen_client()
+        if not self._is_token_valid():
+            self._get_token()
         pEvents = []
         for event in events:
-            pEvento = self._client.factory.create("pEvento")
-            pEvento["Dominio"] = event["Dominio"]
-            pEvento["NroSerie"] = event["NroSerie"]
-            pEvento["Codigo"] = event["Codigo"]
-            pEvento["Latitud"] = event["Latitud"]
-            pEvento["Longitud"] = event["Longitud"]
-            pEvento["Altitud"] = event["Altitud"]
-            pEvento["Velocidad"] = event["Velocidad"]
-            pEvento["FechaHoraEvento"] = event["FechaHoraEvento"].replace(" ", "T")
-            pEvento["FechaHoraRecepcion"] = event["FechaHoraRecepcion"].replace(" ", "T")
+            pEvento = self._client.factory.create("ns0:Event")
+            pEvento["asset"] = event["Dominio"]
+            pEvento["serialNumber"] = event["NroSerie"]
+            pEvento["code"] = event["Codigo"]
+            pEvento["latitude"] = event["Latitud"]
+            pEvento["shipment"] = "circulocorp_avl"
+            pEvento["longitude"] = event["Longitud"]
+            pEvento["altitude"] = event["Altitud"]
+            pEvento["speed"] = event["Velocidad"]
+            pEvento["date"] = event["FechaHoraEvento"].replace(" ", "T")
             pEvents.append(pEvento)
-        eventos = self._client.factory.create("ArrayOfPEvento")
-        eventos.pEvento = pEvents
-        resp = self._client.service.LoginYInsertarEventos(self._user, self._pass, eventos)
+        eventos = self._client.factory.create("ns0:ArrayOfEvent")
+        eventos.Event = pEvents
+        resp = self._client.service.GPSAssetTracking(self._token['token'], eventos)
         return resp
