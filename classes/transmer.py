@@ -9,6 +9,7 @@ class Transmer(object):
         self._pass = password
         self._url = url
         self._client = None
+        self._token = None
 
     def _gen_client(self):
         if self._client is None:
