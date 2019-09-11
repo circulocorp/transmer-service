@@ -40,7 +40,7 @@ class Transmer(object):
             pEvento["serialNumber"] = event["NroSerie"]
             pEvento["code"] = event["Codigo"]
             pEvento["latitude"] = event["Latitud"]
-            pEvento["shipment"] = "circulocorp_avl"
+            pEvento["shipment"] = ""
             pEvento["longitude"] = event["Longitud"]
             pEvento["altitude"] = event["Altitud"]
             pEvento["speed"] = event["Velocidad"]
