@@ -55,11 +55,22 @@ def send(data):
                 extra={'props': {"raw": data, "app": config["name"], "label": config["name"]}})
     resp = transmer.send_events(data)
     if resp:
+        logger.info("DEBUG",
+                    extra={'props': {"raw": resp.text, "app": config["name"], "label": config["name"]}})
         logger.info("Data was accepted by Transmer",
                     extra={'props': {"raw": data, "app": config["name"], "label": config["name"]}})
     else:
         print(resp)
         logger.error(resp, extra={'props': {"raw": data, "app": config["name"], "label": config["name"]}})
+
+
+def get_name(description):
+    if "LETICIA MARTINEZ MADRID" in description.upper():
+        return "LETICIA MARTINEZ MADRID"
+    elif "GIOVANNI PAREDES CHAVEZ" in description.upper():
+        return "LETICIA MARTINEZ MADRID"
+    else:
+        return ""
 
 
 def fix_data(msg):
@@ -73,6 +84,7 @@ def fix_data(msg):
             pEvent["Dominio"] = vehicle["Registration"]
             pEvent["NroSerie"] = vehicle["Description"]
             pEvent["Codigo"] = "1"
+            pEvent["customer_name"] = get_name(vehicle["Description"])
             pEvent["Latitud"] = event["header"]["Latitude"]
             pEvent["Longitud"] = event["header"]["Longitude"]
             pEvent["Altitud"] = event["header"]["Odometer"]
