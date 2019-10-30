@@ -44,11 +44,11 @@ class Transmer(object):
             pEvento["longitude"] = event["Longitud"]
             pEvento["altitude"] = event["Altitud"]
             pEvento["speed"] = event["Velocidad"]
-            pEvento["Customer.name"] = event["customer_name"]
             if event["customer_name"] != "":
-                pEvento["Customer.id"] = "41013"
-            else:
-                pEvento["Customer.id"] = ""
+                customer = self._client.factory.create("ns0:Customer")
+                customer['id'] = "41013"
+                customer['name'] = event["customer_name"]
+                pEvento["Customer"] = customer
             pEvento["date"] = event["FechaHoraEvento"].replace(" ", "T")
             pEvents.append(pEvento)
         eventos = self._client.factory.create("ns0:ArrayOfEvent")
