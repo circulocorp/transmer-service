@@ -66,7 +66,7 @@ def get_name(description):
     if "LETICIA MARTINEZ MADRID" in description.upper():
         return "LETICIA MARTINEZ MADRID"
     elif "GIOVANNI PAREDES CHAVEZ" in description.upper():
-        return "LETICIA MARTINEZ MADRID"
+        return "GIOVANNI PAREDES CHAVEZ"
     else:
         return ""
 
