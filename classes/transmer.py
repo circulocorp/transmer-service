@@ -48,7 +48,7 @@ class Transmer(object):
                 customer = self._client.factory.create("ns0:Customer")
                 customer['id'] = "41013"
                 customer['name'] = event["customer_name"]
-                pEvento["Customer"] = customer
+                pEvento["customer"] = customer
             pEvento["date"] = event["FechaHoraEvento"].replace(" ", "T")
             pEvents.append(pEvento)
         eventos = self._client.factory.create("ns0:ArrayOfEvent")
